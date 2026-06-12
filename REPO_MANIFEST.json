@@ -1,0 +1,35 @@
+{
+  "framework_id": "fight-entity-agent-framework",
+  "framework_version": "0.1.0",
+  "description": "跨项目战斗实体 Agent 框架：spec + EngineAdapter + Cursor 通用规程。不含任何游戏引擎实现。",
+  "repo_layout": {
+    "README.md": "tools/fight_entity_agent_framework/README.md",
+    "AGENTS.md": "tools/fight_entity_agent_framework/AGENTS.md",
+    "REPO_MANIFEST.json": "tools/fight_entity_agent_framework/REPO_MANIFEST.json",
+    "python/fight_entity_core": "tools/fight_entity_core",
+    "python/run_fight_entity_pipeline.py": "tools/run_fight_entity_pipeline.py",
+    "schema/spec.schema.json": "tools/fight_entity_core/spec.schema.json",
+    "cursor/rules/fight-entity-core-portable.mdc": ".cursor/rules/fight-entity-core-portable.mdc",
+    "cursor/skills/wy-fight-entity-core-doc/SKILL.md": ".cursor/skills/wy-fight-entity-core-doc/SKILL.md",
+    "docs/bootstrap-new-project.md": "tools/fight_entity_agent_framework/docs/bootstrap-new-project.md",
+    "docs/adapter-guide.md": "tools/fight_entity_agent_framework/docs/adapter-guide.md",
+    "docs/git-split-boundary.md": "tools/fight_entity_agent_framework/docs/git-split-boundary.md",
+    "templates/EngineAdapter.py.template": "tools/fight_entity_agent_framework/templates/EngineAdapter.py.template",
+    "templates/project-agent-profile.mdc.template": "tools/fight_entity_agent_framework/templates/project-agent-profile.mdc.template",
+    "templates/project-orchestrator-skill.md.template": "tools/fight_entity_agent_framework/templates/project-orchestrator-skill.md.template",
+    "templates/host-package-__init__.py.template": "tools/fight_entity_agent_framework/templates/host-package-__init__.py.template"
+  },
+  "explicitly_excluded_from_framework_repo": [
+    "tools/fight_entity_host_wangyue",
+    "tools/fight_entity_core/adapters/wangyue_unity.py",
+    ".cursor/rules/link-to-fight-entity-partner-spec.mdc",
+    ".cursor/rules/link-to-fight-entity-chaos-spec.mdc",
+    ".cursor/skills/wy-fight-entity-orchestrator-doc",
+    "tools/yueling_*",
+    "tools/run_yueling_battle_pipeline_from_spec.py",
+    "tools/cache_spec_extract.py",
+    "custompackage",
+    "configrepo",
+    "docs/knowledge/references/fight-entity-partner-pipeline-lessons.md"
+  ]
+}

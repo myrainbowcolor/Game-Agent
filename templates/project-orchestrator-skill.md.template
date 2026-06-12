@@ -1,0 +1,33 @@
+---
+name: {{PROJECT_SLUG}}-orchestrator-doc
+description: {{PROJECT_NAME}} 战斗实体主编排（宿主项目）；继承框架 wy-fight-entity-core-doc，补充路径/表/验收。
+---
+
+# {{PROJECT_NAME}} 战斗实体主编排
+
+## 前置（强制）
+
+1. Read 框架仓 `wy-fight-entity-core-doc/SKILL.md`
+2. Read 本项目 `{{PROJECT_SLUG}}-agent-profile` 规则
+
+## pipeline_profile
+
+`{{PROFILE_ID}}`
+
+## Phase 写集（本项目）
+
+| phase_id | 写集 | 退出条件 |
+| --- | --- | --- |
+| P-PREFAB | {{PREFAB_WRITE_SET}} | |
+| P-ENTITY | {{ENTITY_WRITE_SET}} | |
+| P-VERIFY | — | `[pipeline-ledger] converged=true` |
+
+## 一键命令
+
+```bash
+python tools/run_fight_entity_pipeline.py --entity-id <Id> --profile {{PROFILE_ID}}
+```
+
+## Gaps
+
+沿用框架 `spec.gaps[]`；项目特有缺口记入本项目 Skill 附录。

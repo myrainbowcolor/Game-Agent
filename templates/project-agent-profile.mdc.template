@@ -1,0 +1,37 @@
+---
+description: {{PROJECT_NAME}} 战斗实体 Agent 剖面（宿主项目专用，不进框架 Git 仓）
+alwaysApply: false
+---
+
+# {{PROJECT_NAME}} · 战斗实体 Agent 剖面
+
+> 通用 Phase / spec / Adapter 契约见框架仓 `wy-fight-entity-core-doc` 与 `fight-entity-core-portable.mdc`。
+
+## pipeline_profile
+
+- 默认：`{{PROFILE_ID}}`
+- CLI：`python tools/run_fight_entity_pipeline.py --entity-id <Id> --profile {{PROFILE_ID}}`
+
+## 真源
+
+| 类型 | 路径 |
+| --- | --- |
+| Excel | `{{EXCEL_ROOT}}` |
+| DataTable | `{{DATATABLE_ROOT}}` |
+| JSON | `{{JSON_ROOT}}` |
+
+Intake：{{INTAKE_SCRIPT}}
+
+## 写集（本项目）
+
+- P-ENTITY：{{MAIN_ENTITY_PATH_PATTERN}}
+- P-EXPORT：{{EXPORT_PATH_PATTERN}}
+
+## 禁止
+
+- 禁止引用其它项目/引擎的参考实体整包拷贝
+- 禁止绕过 `EngineAdapter` 直接改运行时未文档化路径
+
+## 与框架关系
+
+本文件 **仅存在于宿主项目 Git**；框架升级时只更新 submodule，不覆盖本 profile。

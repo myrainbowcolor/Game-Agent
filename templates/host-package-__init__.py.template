@@ -1,0 +1,3 @@
+"""宿主 EngineAdapter 包（放在游戏项目仓 tools/fight_entity_host_<project>/，不进框架 Git）。"""
+
+from fight_entity_host_<project>.<engine>_adapter import <EngineAdapterClass>  # noqa: F401

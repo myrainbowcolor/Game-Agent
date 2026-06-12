@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+"""{{PROJECT_NAME}} EngineAdapter — 放在宿主项目仓，不要提交到框架 Git 仓。"""
+from __future__ import annotations
+
+from typing import Any
+
+from fight_entity_core.adapter import EngineAdapter, PhaseResult, register_adapter
+
+
+@register_adapter
+class {{ADAPTER_CLASS}}(EngineAdapter):
+    profile_id = "{{PROFILE_ID}}"
+
+    def preflight_logic_asset(self, spec: dict[str, Any], entity_id: int) -> PhaseResult:
+        return PhaseResult("P-PREFAB", 0, messages=["TODO"])
+
+    def generate_main_entity(self, spec: dict[str, Any], entity_id: int) -> PhaseResult:
+        return PhaseResult("P-ENTITY", 0, messages=["TODO"])
+
+    def generate_derived(self, spec: dict[str, Any], entity_id: int) -> PhaseResult:
+        return PhaseResult("P-DERIVED-ENTITY", 0, messages=["TODO"])
+
+    def wire_skills(self, spec: dict[str, Any], entity_id: int) -> PhaseResult:
+        return PhaseResult("P-SKILL", 0, messages=["TODO"])
+
+    def export_runtime(self, spec: dict[str, Any], entity_id: int) -> PhaseResult:
+        return PhaseResult("P-EXPORT", 0, messages=["TODO"])
+
+    def verify(self, spec: dict[str, Any], entity_id: int) -> PhaseResult:
+        return PhaseResult("P-VERIFY", 0, messages=["TODO"])

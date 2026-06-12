@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fight-entity-core/spec.schema.v0",
+  "title": "FightEntitySpecV0",
+  "description": "引擎无关战斗实体管线规格（v0）。Excel / DataTable / JSON 真源须 normalize 为本 schema。",
+  "type": "object",
+  "required": ["entity_id", "pipeline_profile"],
+  "properties": {
+    "entity_id": {
+      "type": "integer",
+      "description": "主实体 ID"
+    },
+    "pipeline_profile": {
+      "type": "string",
+      "description": "引擎/业务剖面，如 stub_engine | unity_wangyue | custom_engine_v1"
+    },
+    "name_zh": {
+      "type": "string",
+      "description": "主实体展示名（个体指称）"
+    },
+    "model_name": {
+      "type": "string",
+      "description": "表内模型名/资源前缀（引擎适配器解释路径）"
+    },
+    "prefab": {
+      "type": "string",
+      "description": "逻辑体或展示体资源逻辑路径（引擎相关，由 adapter 解析）"
+    },
+    "animator": { "type": "string" },
+    "art_prefab": { "type": "string" },
+    "element_type": { "type": "integer" },
+    "skills": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/skill" }
+    },
+    "derived": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/derived" }
+    },
+    "magics": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "table_patches": {
+      "type": "array",
+      "description": "表写入补丁（xlsx / datatable / json 由 table writer 解析）",
+      "items": { "$ref": "#/$defs/table_patch" }
+    },
+    "gaps": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/gap" }
+    },
+    "_meta": {
+      "type": "object",
+      "description": "提取/推断元数据，非运行时真源"
+    }
+  },
+  "$defs": {
+    "skill": {
+      "type": "object",
+      "required": ["skill_id"],
+      "properties": {
+        "skill_id": { "type": "integer" },
+        "skill_label": { "type": "string" },
+        "anim_en": { "type": "string" },
+        "total_frame": { "type": "integer" }
+      }
+    },
+    "derived": {
+      "type": "object",
+      "required": ["entity_id"],
+      "properties": {
+        "entity_id": { "type": "integer" },
+        "owner_skill_id": { "type": "integer" },
+        "role": { "type": "string" },
+        "prefab": { "type": "string" }
+      }
+    },
+    "table_patch": {
+      "type": "object",
+      "required": ["target", "format"],
+      "properties": {
+        "target": { "type": "string", "description": "逻辑表名，如 partner_show / monster_attr" },
+        "format": {
+          "type": "string",
+          "enum": ["xlsx", "datatable", "json", "csv"]
+        },
+        "sheet": { "type": "string" },
+        "asset": { "type": "string" },
+        "row_key": {},
+        "columns": { "type": "object" }
+      }
+    },
+    "gap": {
+      "type": "object",
+      "properties": {
+        "kind": { "type": "string" },
+        "severity": { "type": "string", "enum": ["info", "warn", "error"] },
+        "message": { "type": "string" },
+        "field": { "type": "string" }
+      }
+    }
+  }
+}
