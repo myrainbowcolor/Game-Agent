@@ -43,4 +43,4 @@ class MyEngineAdapter(EngineAdapter):
 ## 参考
 
 - 桩：`adapters/stub_engine.py`（框架仓）
-- 委托旧管线：`adapters/wangyue_unity.py`（望月游戏仓，非框架仓）
+- 宿主委托：项目仓 `fight_entity_host_<project>/`（可包装既有管线脚本，不进框架仓）

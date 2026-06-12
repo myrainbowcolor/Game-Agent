@@ -12,7 +12,7 @@
     },
     "pipeline_profile": {
       "type": "string",
-      "description": "引擎/业务剖面，如 stub_engine | unity_wangyue | custom_engine_v1"
+      "description": "EngineAdapter profile_id，如 stub_engine | custom_engine_v1"
     },
     "name_zh": {
       "type": "string",

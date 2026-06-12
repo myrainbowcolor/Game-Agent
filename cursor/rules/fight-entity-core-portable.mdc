@@ -1,31 +1,39 @@
 ---
-description: 战斗实体管线·引擎无关内核（spec + EngineAdapter + 打包）；自研/多引擎项目必读
+description: Game-Agent 战斗实体内核（spec + EngineAdapter）；跨项目通用，不含宿主实现
 alwaysApply: false
 ---
 
-# 战斗实体 Core（可移植）
+# Fight Entity Core（框架层）
 
-## 与望月 Unity 专线的关系
+## 分层
 
-| 层级 | 路径 | 打包给新引擎 |
+| 层级 | 职责 | 所在仓库 |
 | --- | --- | --- |
-| **Core 内核** | `tools/fight_entity_core/`、`run_fight_entity_pipeline.py` | **必须** |
-| **Core Agent** | 本规则 + `wy-fight-entity-core-doc` | **必须** |
-| **望月 Profile** | `wy-fight-entity-orchestrator-doc`、`link-to-fight-entity-partner-spec`、Mo1F 等 rules | **仅 Unity 望月工程** |
-
-自研引擎：只打包 Core + Core Agent；**不要**默认打包全套 `fight-entity-*` 望月 rules（除非仍用 `unity_wangyue` adapter）。
+| **框架** | `fight_entity_core`、`run_fight_entity_pipeline.py`、本规则 | [Game-Agent](https://github.com/myrainbowcolor/Game-Agent) |
+| **宿主** | `fight_entity_host_<project>/`、表映射、引擎写盘 | 各游戏项目仓 |
+| **项目 Agent** | `<project>-agent-profile`、orchestrator Skill | 各游戏项目仓 |
 
 ## 契约
 
-1. 真源（Excel / DataTable / JSON）→ **`spec.json`**（`fight_entity_core/spec.schema.json`）
-2. **`pipeline_profile`** 选择 `EngineAdapter`（`stub_engine` | `unity_wangyue` | 自研注册名）
-3. CLI：`python tools/run_fight_entity_pipeline.py --entity-id <id> --profile <profile>`
+1. 真源（Excel / DataTable / JSON）→ **`spec.json`**（`spec.schema.json`）
+2. **`pipeline_profile`** = 已注册的 `EngineAdapter.profile_id`
+3. CLI 须显式 `--spec` 或 `--intake`；宿主 adapter 用 `--host-package <pkg>` 或 `FIGHT_ENTITY_HOST_PACKAGES` 注册
 4. 收口以 `[pipeline-ledger] converged=true` 为准
 
-## 新引擎接入
+## 框架 CLI
 
-实现 `fight_entity_core/adapter.py` 的六个钩子并 `@register_adapter`；Intake 扩展 `fight_entity_core/intake.py`。
+```bash
+python <framework>/python/run_fight_entity_pipeline.py \
+  --entity-id <id> --profile stub_engine --intake <spec.json>
+```
 
-## 打包
+## 宿主接入
 
-manifest 组件：`fight_entity_core` + `agent_core`（见 `fight_entity_pipeline_bundle_manifest.json`）。
+1. 在**项目仓**实现 `fight_entity_host_<project>/` 并 `@register_adapter`
+2. 项目包装脚本负责 `--host-package` 与项目默认路径（**不要**写进框架 CLI）
+3. 扩展 intake 映射或项目侧 `*_intake.py`
+
+## 禁止
+
+- 在框架仓 hardcode 任一游戏项目包名、表路径、实体号段
+- 在框架 Skill 中写宿主 orchestrator 细则

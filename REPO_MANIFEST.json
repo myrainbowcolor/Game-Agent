@@ -1,7 +1,7 @@
 {
   "framework_id": "game-agent",
   "framework_repo_url": "https://github.com/myrainbowcolor/Game-Agent",
-  "framework_version": "0.1.0",
+  "framework_version": "0.2.0",
   "description": "Game-Agent 战斗实体模块：spec + EngineAdapter + Cursor 通用规程。不含任何游戏引擎实现。",
   "repo_layout": {
     "README.md": "tools/fight_entity_agent_framework/README.md",
@@ -11,17 +11,19 @@
     "python/run_fight_entity_pipeline.py": "tools/run_fight_entity_pipeline.py",
     "schema/spec.schema.json": "tools/fight_entity_core/spec.schema.json",
     "cursor/rules/fight-entity-core-portable.mdc": ".cursor/rules/fight-entity-core-portable.mdc",
-    "cursor/skills/wy-fight-entity-core-doc/SKILL.md": ".cursor/skills/wy-fight-entity-core-doc/SKILL.md",
+    "cursor/skills/game-agent-fight-entity-core/SKILL.md": "tools/fight_entity_agent_framework/cursor-skills/game-agent-fight-entity-core/SKILL.md",
     "docs/bootstrap-new-project.md": "tools/fight_entity_agent_framework/docs/bootstrap-new-project.md",
     "docs/adapter-guide.md": "tools/fight_entity_agent_framework/docs/adapter-guide.md",
     "docs/git-split-boundary.md": "tools/fight_entity_agent_framework/docs/git-split-boundary.md",
-    "docs/wangyue-submodule.md": "tools/fight_entity_agent_framework/docs/wangyue-submodule.md",
     "templates/EngineAdapter.py.template": "tools/fight_entity_agent_framework/templates/EngineAdapter.py.template",
     "templates/project-agent-profile.mdc.template": "tools/fight_entity_agent_framework/templates/project-agent-profile.mdc.template",
     "templates/project-orchestrator-skill.md.template": "tools/fight_entity_agent_framework/templates/project-orchestrator-skill.md.template",
-    "templates/host-package-__init__.py.template": "tools/fight_entity_agent_framework/templates/host-package-__init__.py.template"
+    "templates/host-package-__init__.py.template": "tools/fight_entity_agent_framework/templates/host-package-__init__.py.template",
+    "templates/host-run-cli.py.template": "tools/fight_entity_agent_framework/templates/host-run-cli.py.template"
   },
   "explicitly_excluded_from_framework_repo": [
+    "cursor/skills/wy-fight-entity-core-doc",
+    "docs/wangyue-submodule.md",
     "tools/fight_entity_host_wangyue",
     "tools/fight_entity_core/adapters/wangyue_unity.py",
     ".cursor/rules/link-to-fight-entity-partner-spec.mdc",

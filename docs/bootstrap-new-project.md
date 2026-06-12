@@ -3,19 +3,17 @@
 ## 1. 引入框架仓
 
 ```bash
-git submodule add <framework-repo-url> vendor/fight-entity-agent-framework
+git submodule add https://github.com/myrainbowcolor/Game-Agent.git vendor/Game-Agent
 ```
 
-或拷贝 `export_framework_repo.ps1` 产出目录。
-
-将 `vendor/fight-entity-agent-framework/cursor/` 链到项目 `.cursor/`（复制或 junction），或把该路径加入 Cursor 多根工作区。
+将 `vendor/Game-Agent/cursor/` 链到项目 `.cursor/`（复制、junction 或多根工作区）。
 
 ## 2. 注册 EngineAdapter
 
 1. 新建 `tools/fight_entity_host_<project>/`（**宿主包，不进框架仓**）
 2. 复制 `templates/EngineAdapter.py.template` → `fight_entity_host_<project>/<engine>_adapter.py`
 3. 实现六个钩子，`profile_id = "<your_project>_engine"`，用 `@register_adapter` 装饰
-4. 在 `__init__.py` 中 `import` adapter；宿主 `run_fight_entity_pipeline` 包装脚本里 `import fight_entity_host_<project>`
+4. 在 `__init__.py` 中 `import` adapter；复制 `templates/host-run-cli.py.template` 为项目 `run_pipeline.py`，注入 `--host-package`
 
 ## 3. 新增项目 Agent 层（不进框架仓）
 
@@ -36,11 +34,9 @@ Excel / DataTable / JSON 三种入口归一为 **同一 spec**，Agent 主链不
 ## 5. 验证
 
 ```bash
-python vendor/.../run_fight_entity_pipeline.py --entity-id <id> --profile <your_project>_engine --intake <spec.json>
+python vendor/Game-Agent/python/run_fight_entity_pipeline.py \
+  --host-package fight_entity_host_<project> \
+  --entity-id <id> --profile <your_project>_engine --intake <spec.json>
 ```
 
 stdout 须出现 `[pipeline-ledger] converged=true`。
-
-## 6. 望月作为参考宿主
-
-望月 `tools/fight_entity_host_wangyue/` 是 **宿主实现示例**，放在游戏仓，不进入框架 Git。

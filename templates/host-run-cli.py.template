@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+"""{{PROJECT_NAME}} 宿主 CLI：注册 host 包 + 项目默认路径（不进 Game-Agent 框架仓）。"""
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+_CLIENT = Path(__file__).resolve().parents[{{CLIENT_ROOT_PARENTS}}]
+_TOOLS = _CLIENT / "tools"
+if str(_TOOLS) not in sys.path:
+    sys.path.insert(0, str(_TOOLS))
+
+from fight_entity_core.cli import run
+
+_HOST_PKG = "fight_entity_host_{{PROJECT_SLUG}}"
+
+
+def main(argv: list[str] | None = None) -> int:
+    raw = list(argv if argv is not None else sys.argv[1:])
+    if "--host-package" not in raw:
+        raw = ["--host-package", _HOST_PKG, *raw]
+    # TODO: 无 --spec/--intake 时注入项目默认 spec 路径
+    return run(raw, tools_dir=_TOOLS)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
